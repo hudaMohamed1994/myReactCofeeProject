@@ -6,9 +6,11 @@ import CartItemScreen from '../screens/CartItemScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import colors from '../assets/colors';
 import SvgUri from 'react-native-svg-uri';
+const homePath = require('../assets/images/home.svg'); 
+const heartPath = require('../assets/images/heart.svg'); 
+const notificationPath = require('../assets/images/notification.svg'); 
+const lockPath = require('../assets/images/lock.svg'); 
 
-
-const imagePath = require('../assets/images/home.svg'); 
 
 const Tab = createBottomTabNavigator();
 
@@ -22,9 +24,9 @@ const MyTabNavigation = () => {
           tabBarIcon: ({focused ,color, size}) => (
             <SvgUri
               fill = {focused ? colors.warning: colors.dark}
-              width={10}
-              height={10}
-              source={imagePath}
+              width={24}
+              height={24}
+              source={homePath}
             />
           ),
         }}
@@ -34,9 +36,9 @@ const MyTabNavigation = () => {
         tabBarIcon: ({focused ,color, size}) => (
           <SvgUri
             fill = {focused ? colors.warning: colors.dark}
-            width={40}
-            height={40}
-            source={imagePath}
+            width={24}
+            height={24}
+            source={heartPath}
           />
         ),
       }}/>
@@ -45,9 +47,9 @@ const MyTabNavigation = () => {
         tabBarIcon: ({focused ,color, size}) => (
           <SvgUri
             fill = {focused ? colors.warning: colors.dark}
-            width={size}
-            height={size}
-            source={imagePath}
+            width={24}
+            height={24}
+            source={lockPath}
           />
         ),
       }}/>
@@ -56,9 +58,9 @@ const MyTabNavigation = () => {
         tabBarIcon: ({focused ,color, size}) => (
           <SvgUri
             fill = {focused ? colors.warning: colors.dark}
-            width={size}
-            height={size}
-            source={imagePath}
+            width={24}
+            height={24}
+            source={notificationPath}
           />
         ),
       }}/>

@@ -5,7 +5,8 @@ const colors = {
     danger: '#dc3545',
     warning: '#ffc107',
     info: '#17a2b8',
-    light: '#f8f9fa',
+  light: '#f8f9fa',
+    black : '#0C0F14' ,
     dark: '#343a40',
     // Add more colors as needed
   };
