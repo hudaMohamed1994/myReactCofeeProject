@@ -1,4 +1,5 @@
-import {NavigationContainer} from '@react-navigation/native';
+
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MyTabNavigation from './src/Navigator/MyTabNavigation';
@@ -13,7 +14,7 @@ const App = () => {
       <Stack.Screen
           name="MyTab"
           component={MyTabNavigation}
-          options={ {animation: 'slide_from_bottom'}}
+          options={{animation: 'slide_from_bottom' , headerShown : false}}
         />
         <Stack.Screen
           name="PaymentScreen"

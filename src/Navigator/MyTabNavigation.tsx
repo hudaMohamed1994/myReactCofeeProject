@@ -5,12 +5,7 @@ import FavouriteScreen from '../screens/FavouriteScreen';
 import CartItemScreen from '../screens/CartItemScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import colors from '../assets/colors';
-import SvgUri from 'react-native-svg-uri';
-const homePath = require('../assets/images/home.svg'); 
-const heartPath = require('../assets/images/heart.svg'); 
-const notificationPath = require('../assets/images/notification.svg'); 
-const lockPath = require('../assets/images/lock.svg'); 
-
+import CustomIcon from '../assets/CustomIcon';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,49 +16,55 @@ const MyTabNavigation = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({focused ,color, size}) => (
-            <SvgUri
-              fill = {focused ? colors.warning: colors.dark}
-              width={24}
-              height={24}
-              source={homePath}
-            />
+          tabBarIcon: ({focused}) => (
+            <CustomIcon
+            name= {"home"}
+            size={25}
+            color={
+              focused ? colors.primary : colors.secondary
+            }
+          />
           ),
         }}
       />
       <Tab.Screen name="FavouriteScreen" component={FavouriteScreen}
-      options={{
-        tabBarIcon: ({focused ,color, size}) => (
-          <SvgUri
-            fill = {focused ? colors.warning: colors.dark}
-            width={24}
-            height={24}
-            source={heartPath}
-          />
-        ),
-      }}/>
-      <Tab.Screen name="cartItemScreen" component={CartItemScreen}
-      options={{
-        tabBarIcon: ({focused ,color, size}) => (
-          <SvgUri
-            fill = {focused ? colors.warning: colors.dark}
-            width={24}
-            height={24}
-            source={lockPath}
-          />
-        ),
-      }}/>
+        options={
+          {
+            tabBarIcon: ({ focused }) => (
+              <CustomIcon
+                name={"like"}
+                size={25}
+                color={focused ? colors.primary : colors.secondary}
+              />
+            )
+          }
+        }
+      />
+      <Tab.Screen name="CartItemScreen" component={CartItemScreen}
+        options={
+          {
+            tabBarIcon: ({ focused }) => (
+              <CustomIcon
+                name={"home"}
+                size={25}
+                color={focused ? colors.primary : colors.secondary}
+              />
+           )
+         }
+       }
+     />
       <Tab.Screen name="HistoryScreen" component={HistoryScreen}
-      options={{
-        tabBarIcon: ({focused ,color, size}) => (
-          <SvgUri
-            fill = {focused ? colors.warning: colors.dark}
-            width={24}
-            height={24}
-            source={notificationPath}
-          />
-        ),
-      }}/>
+      options={
+        {
+          tabBarIcon: ({ focused }) => (
+            <CustomIcon
+              name={"bell"}
+              size={25}
+              color={focused ? colors.primary : colors.secondary}
+            />
+         )
+       }
+     }/>
     </Tab.Navigator>
   );
 };
