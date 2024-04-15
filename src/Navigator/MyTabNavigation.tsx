@@ -1,12 +1,11 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import FavouriteScreen from '../screens/FavouriteScreen';
 import CartItemScreen from '../screens/CartItemScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import colors from '../assets/colors';
 import CustomIcon from '../assets/CustomIcon';
-
 const Tab = createBottomTabNavigator();
 
 const MyTabNavigation = () => {
@@ -18,7 +17,7 @@ const MyTabNavigation = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <CustomIcon
-            name= {"home"}
+            name= "home"
             size={25}
             color={
               focused ? colors.primary : colors.secondary
