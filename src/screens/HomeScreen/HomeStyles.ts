@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors';
 
 const HomeStyle = StyleSheet.create({
@@ -11,6 +11,12 @@ const HomeStyle = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
+  catogryText: {
+    fontSize: 15,
+    marginStart :2 ,
+    marginEnd : 20 ,
+    color: colors.lightGray,
+  },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -20,9 +26,13 @@ const HomeStyle = StyleSheet.create({
     paddingHorizontal: 10,
     marginVertical: 5,
   },
+  catagoryContainer: {
+    flexDirection: 'row', // Ensure the FlatList items are arranged horizontally
+    backgroundColor: 'lightgray',
+  },
   parentStyle: {
-    flex: 1,
-    backgroundColor: colors.black,
+    flexGrow: 1,
+    backgroundColor : colors.black
   },
   searchBoxstyle: {
     flex: 1,
