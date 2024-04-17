@@ -1,9 +1,11 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View , ImageProps} from 'react-native';
 import colors from './assets/colors';
+import CustomIcon from './assets/CustomIcon';
 
 interface CoffeeParameters {
   index: number;
+  image: ImageProps;
   name: string;
   price: string;
   details: string;
@@ -13,35 +15,69 @@ const CoffeeCard: React.FC<CoffeeParameters> = ({
   index,
   name,
   price,
+  image,
   details,
 }) => {
   return (
     <View style={styles.container}>
+        <ImageBackground
+        source={image}
+        style={styles.CardImageBG}
+        resizeMode="cover"></ImageBackground>
       <Text style={styles.text}>{name}</Text>
       <Text style={styles.text}>{details}</Text>
+      <View style={styles.priceContainer}>
+        <Text style={styles.priceText}>{price + '$'}</Text>
+        <View style = {styles.ImageStyle}>
+        <CustomIcon  name="add" size={8} color={colors.light} />
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: 150,
-    height: 150,
-    marginEnd : 20 ,
+    flex : 1 ,
     padding: 10,
+    marginTop: 20,
+    marginBottom : 20 ,
     borderWidth: 1,
     borderRadius: 23,
     borderColor: '#ddd',
-    backgroundColor: '#fff',
-    marginBottom: 10,
+    backgroundColor: colors.black,
   },
   text: {
-    color: colors.lightGray,
+    padding : 5 ,
+    color: 'white',
     fontSize: 15,
+  },
+  priceText: {
+    color: 'white',
+    fontSize: 15,
+  },
+  ImageStyle: {
+    borderRadius: 5,
+    marginEnd: 5,
+    padding : 10 ,
+    backgroundColor : colors.warning
+  },
+  priceContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems : 'center'
   },
   imageStyle: {
     width: 130,
     height: 130,
+  },
+  CardImageBG: {
+    width: 150,
+    height: 150,
+    alignItems : 'center',
+    borderRadius: 20,
+    marginBottom: 15,
+    overflow: 'hidden',
   },
 });
 

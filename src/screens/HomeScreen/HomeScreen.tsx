@@ -6,6 +6,8 @@ import {
   Keyboard,
   StatusBar,
   FlatList,
+  ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {useState} from 'react';
 import colors from '../../assets/colors';
@@ -28,21 +30,11 @@ function getCategoryNames(categoriesData: Category[]) {
 }
 
 function getDataByCategory(category: string, CoffeeData: Category[]) {
-  switch (true) {
-    case category == constants.LatteCategory:
-      return CoffeeData.filter(item => item.name == constants.LatteCategory);
-      break;
-    case category == constants.Macchiato:
-      return CoffeeData.filter(item => item.name == constants.Macchiato);
-      break;
-    case category == constants.Espresso:
-      return CoffeeData.filter(item => item.name == constants.Espresso);
-      break;
-    case category == constants.Cappucchino:
-      return CoffeeData.filter(item => item.name == constants.Cappucchino);
-      break;
-    default:
-      return CoffeeData;
+  console.log(category);
+  if (category == 'All') {
+    return CoffeeData;
+  } else {
+    return CoffeeData.filter(item => item.name == category);
   }
 }
 
@@ -54,58 +46,70 @@ const HomeScreen = () => {
   const BeansList = useStore((state: any) => state.beansData);
   const categoryList = getCategoryNames(CoffeeList);
   const handleSearch = () => {
+    console.log('search text ', searchText);
     setCurrentCofee(getDataByCategory(searchText, CoffeeList));
-    console.log(setCurrentCofee(getDataByCategory(searchText, CoffeeList)));
+    console.log(CoffeeList.length);
+  };
+
+  const handleCategrorySearch = (category: string) => {
+    setCurrentCofee(getDataByCategory(category, CoffeeList));
+    console.log(currentCofeeList.length);
   };
 
   return (
-    <View style={HomeStyle.parentStyle}>
-      <StatusBar backgroundColor={colors.black} />
-      <Text style={HomeStyle.titleStyle}>
-        Find the best{'\n'}coffee for you
-      </Text>
-      <View style={HomeStyle.inputContainer}>
-        <CustomIcon name="search" size={20} color={colors.light} />
-        <TextInput
-          onSubmitEditing={handleSearch}
-          onChangeText={text => setSearchText(text)}
-          style={HomeStyle.searchBoxstyle}
-          placeholder=" find your coffee ..."
-          placeholderTextColor={colors.lightGray}
-          keyboardType="default"></TextInput>
+    <ScrollView>
+      <View style={HomeStyle.parentStyle}>
+        <StatusBar backgroundColor={colors.black} />
+        <Text style={HomeStyle.titleStyle}>
+          Find the best{'\n'}coffee for you
+        </Text>
+        <View style={HomeStyle.inputContainer}>
+          <CustomIcon name="search" size={20} color={colors.light} />
+          <TextInput
+            onSubmitEditing={handleSearch}
+            onChangeText={text => setSearchText(text)}
+            style={HomeStyle.searchBoxstyle}
+            placeholder=" find your coffee ..."
+            placeholderTextColor={colors.lightGray}
+            keyboardType="default"></TextInput>
+        </View>
+        <FlatList
+          data={categoryList}
+          horizontal
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => handleCategrorySearch(item)}>
+              <View>
+                <Text style={HomeStyle.catogryText}>{item}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+        <FlatList
+          data={currentCofeeList}
+          horizontal
+          renderItem={({item}) => (
+            <CoffeeCard
+              index={item.index}
+              name={item.name}
+              image={item.imagelink_square}
+              price={item.prices[0].price}
+              details={item.special_ingredient}></CoffeeCard>
+          )}
+        />
+        <FlatList
+          data={currentCofeeList}
+          horizontal
+          renderItem={({item}) => (
+            <CoffeeCard
+              image={item.imagelink_square}
+              index={item.index}
+              name={item.name}
+              price={item.prices[0].price}
+              details={item.special_ingredient}></CoffeeCard>
+          )}
+        />
       </View>
-      <FlatList
-        data={categoryList}
-        horizontal
-        renderItem={({item}) => (
-          <View>
-            <Text style={HomeStyle.catogryText}>{item}</Text>
-          </View>
-        )}
-      />
-      <FlatList
-        data={currentCofeeList}
-        horizontal
-        renderItem={({item}) => (
-          <CoffeeCard
-            index={item.index}
-            name={item.name}
-            price={item.prices[0].price}
-            details={item.special_ingredient}></CoffeeCard>
-        )}
-      />
-       <FlatList
-        data={currentCofeeList}
-        horizontal
-        renderItem={({item}) => (
-          <CoffeeCard
-            index={item.index}
-            name={item.name}
-            price={item.prices[0].price}
-            details={item.special_ingredient}></CoffeeCard>
-        )}
-      />
-    </View>
+    </ScrollView>
   );
 };
 

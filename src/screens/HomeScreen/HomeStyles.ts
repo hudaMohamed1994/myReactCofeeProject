@@ -14,7 +14,9 @@ const HomeStyle = StyleSheet.create({
   catogryText: {
     fontSize: 15,
     marginStart :2 ,
-    marginEnd : 20 ,
+    marginEnd: 20,
+    marginTop : 20 ,
+    marginBottom : 20 ,
     color: colors.lightGray,
   },
   inputContainer: {

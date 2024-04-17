@@ -1,7 +1,6 @@
 export default {
     LatteCategory: 'Latte',
     Macchiato: 'Macchiato',
-    Cappucchino: 'Latte',
+    Cappucchino: 'Cappucchino',
     Espresso: 'Espresso'
-
 }

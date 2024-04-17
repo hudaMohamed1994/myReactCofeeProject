@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 
 const MyTabNavigation = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel: false}}>
+    <Tab.Navigator  screenOptions={{headerShown: false, tabBarShowLabel: false , tabBarStyle: { backgroundColor : colors.black}}}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -20,7 +20,7 @@ const MyTabNavigation = () => {
             name= "home"
             size={25}
             color={
-              focused ? colors.primary : colors.secondary
+              focused ? colors.warning : colors.lightGray
             }
           />
           ),
@@ -33,7 +33,7 @@ const MyTabNavigation = () => {
               <CustomIcon
                 name={"like"}
                 size={25}
-                color={focused ? colors.primary : colors.secondary}
+                color={focused ? colors.warning : colors.lightGray}
               />
             )
           }
@@ -46,7 +46,7 @@ const MyTabNavigation = () => {
               <CustomIcon
                 name={"home"}
                 size={25}
-                color={focused ? colors.primary : colors.secondary}
+                color={focused ? colors.warning : colors.lightGray}
               />
            )
          }
@@ -59,7 +59,7 @@ const MyTabNavigation = () => {
             <CustomIcon
               name={"bell"}
               size={25}
-              color={focused ? colors.primary : colors.secondary}
+              color={focused ? colors.warning : colors.lightGray}
             />
          )
        }
