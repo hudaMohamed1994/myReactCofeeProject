@@ -18,6 +18,7 @@ const HomeStyle = StyleSheet.create({
     color: colors.lightGray,
   },
   inputContainer: {
+    height : 40 ,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
