@@ -18,12 +18,12 @@ const App = () => {
         />
         <Stack.Screen
           name="PaymentScreen"
-          component={DetailsScreen}
+          component={PaymentScreen}
           options={{animation: 'slide_from_bottom'}}
         />
         <Stack.Screen
-          name="DetailsScreen"
-          component={PaymentScreen}
+          name="Details"
+          component={DetailsScreen}
           options={{animation: 'slide_from_bottom'}}
         />
       </Stack.Navigator>

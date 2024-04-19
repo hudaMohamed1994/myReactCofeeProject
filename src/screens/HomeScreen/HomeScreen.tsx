@@ -14,11 +14,8 @@ import colors from '../../assets/colors';
 import {useStore} from '../../store/store';
 import CustomIcon from '../../assets/CustomIcon';
 import HomeStyle from './HomeStyles';
-import constants from '../../utils/constants';
 import CoffeeCard from '../../CoffeeCard';
-const handlePressOutside = () => {
-  Keyboard.dismiss(); // Dismiss the keyboard when TextInput loses focus
-};
+import Category from '../data/Category';
 
 function getCategoryNames(categoriesData: Category[]) {
   const uniqueCategoryNamesSet: Set<string> = new Set(
@@ -38,22 +35,19 @@ function getDataByCategory(category: string, CoffeeData: Category[]) {
   }
 }
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}: any) => {
   const [searchText, setSearchText] = useState('');
-  const [currentCofeeList, setCurrentCofee] = useState<Category[]>([]);
-
   const CoffeeList: Category[] = useStore((state: any) => state.coffeeList);
+  const [currentCofeeList, setCurrentCofee] = useState<Category[]>(CoffeeList);
   const BeansList = useStore((state: any) => state.beansData);
   const categoryList = getCategoryNames(CoffeeList);
   const handleSearch = () => {
     console.log('search text ', searchText);
     setCurrentCofee(getDataByCategory(searchText, CoffeeList));
-    console.log(CoffeeList.length);
   };
 
   const handleCategrorySearch = (category: string) => {
     setCurrentCofee(getDataByCategory(category, CoffeeList));
-    console.log(currentCofeeList.length);
   };
 
   return (
@@ -87,17 +81,29 @@ const HomeScreen = () => {
         <FlatList
           data={currentCofeeList}
           horizontal
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => {
+                  navigation.push('Details', {
+                    index: item.index,
+                    id: item.id,
+                    type: item.type,
+                  });
+                }}>
             <CoffeeCard
+              image={item.imagelink_square}
               index={item.index}
               name={item.name}
-              image={item.imagelink_square}
               price={item.prices[0].price}
-              details={item.special_ingredient}></CoffeeCard>
+                details={item.special_ingredient}></CoffeeCard>
+              </TouchableOpacity>
           )}
         />
+        <Text style={HomeStyle.titleStyle}>
+          Beanes coffee
+        </Text>
         <FlatList
-          data={currentCofeeList}
+          data={BeansList}
           horizontal
           renderItem={({item}) => (
             <CoffeeCard

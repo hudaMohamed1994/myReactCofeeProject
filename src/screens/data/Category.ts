@@ -1,10 +1,12 @@
-interface Category {
+import { ImageProps } from 'react-native';
+
+export default interface Category {
     id: string;
     name: string;
     description: string;
     roasted: string;
-    imagelink_square: string;
-    imagelink_portrait: string;
+    imagelink_square: ImageProps;
+    imagelink_portrait: ImageProps;
     ingredients: string;
     special_ingredient: string;
     prices: Array<{size: string; price: string; currency: string}>;

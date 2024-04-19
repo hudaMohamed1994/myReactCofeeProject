@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View , ImageProps} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View , ImageProps , TouchableOpacity} from 'react-native';
 import colors from './assets/colors';
 import CustomIcon from './assets/CustomIcon';
 
@@ -10,12 +10,11 @@ interface CoffeeParameters {
   price: string;
   details: string;
 }
-
 const CoffeeCard: React.FC<CoffeeParameters> = ({
+  image,
   index,
   name,
   price,
-  image,
   details,
 }) => {
   return (
@@ -28,9 +27,11 @@ const CoffeeCard: React.FC<CoffeeParameters> = ({
       <Text style={styles.text}>{details}</Text>
       <View style={styles.priceContainer}>
         <Text style={styles.priceText}>{price + '$'}</Text>
+        <TouchableOpacity onPress={() => {}}>
         <View style = {styles.ImageStyle}>
         <CustomIcon  name="add" size={8} color={colors.light} />
-        </View>
+          </View>
+          </TouchableOpacity>
       </View>
     </View>
   );
