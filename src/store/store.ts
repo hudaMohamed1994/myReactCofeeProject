@@ -13,16 +13,19 @@ export const useStore = create(
       beansData: BeansData,
       FavouriteList: [],
       coffeePrice: 0,
-      CartList: [],
+      CartList: [] , 
       HistoryList: [],
       addToCart: (cartItem: Category) =>
         set(
           produce(state => {
             let found = false;
-            console.log('store card', cartItem)
-            if (state.CartList.size > 0) {
+            console.log("cartListSize" , state.CartList)
+            console.log("cartListSize" , state.CartList.length)
+            if (state.CartList.length > 0) {
               state.CartList.forEach((item: Category) => {
-                if (item.id == cartItem.id) {
+                console.log('item.id', item)
+                  console.log('cartItem.id', cartItem.id)
+                if (item.id === cartItem.id) {
                   found = true;
                   let size = false 
                   item.prices.forEach((prices: any) => {

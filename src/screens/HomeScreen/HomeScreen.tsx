@@ -46,7 +46,6 @@ const HomeScreen = ({navigation}: any) => {
 
   const addItemToCart = (cofee: Category) => {
     addToCart(cofee);
-    console.log("add category", cofee)
     console.log ("CartList" , CartList.length )
   };
 
