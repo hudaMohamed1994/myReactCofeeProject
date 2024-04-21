@@ -40,7 +40,16 @@ const HomeScreen = ({navigation}: any) => {
   const CoffeeList: Category[] = useStore((state: any) => state.coffeeList);
   const [currentCofeeList, setCurrentCofee] = useState<Category[]>(CoffeeList);
   const BeansList = useStore((state: any) => state.beansData);
+  const addToCart = useStore((state: any) => state.addToCart);
   const categoryList = getCategoryNames(CoffeeList);
+  const CartList = useStore((state: any) => state.CartList);
+
+  const addItemToCart = (cofee: Category) => {
+    addToCart(cofee);
+    console.log("add category", cofee)
+    console.log ("CartList" , CartList.length )
+  };
+
   const handleSearch = () => {
     console.log('search text ', searchText);
     setCurrentCofee(getDataByCategory(searchText, CoffeeList));
@@ -81,37 +90,29 @@ const HomeScreen = ({navigation}: any) => {
         <FlatList
           data={currentCofeeList}
           horizontal
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <TouchableOpacity
               onPress={() => {
-                  navigation.push('Details', {
-                    index: item.index,
-                    id: item.id,
-                    type: item.type,
-                  });
-                }}>
-            <CoffeeCard
-              image={item.imagelink_square}
-              index={item.index}
-              name={item.name}
-              price={item.prices[0].price}
-                details={item.special_ingredient}></CoffeeCard>
-              </TouchableOpacity>
+                navigation.push('Details', {
+                  index: item.index,
+                  id: item.id,
+                  type: item.type,
+                });
+              }}>
+              <CoffeeCard
+                category={item}
+                clickHandler={addItemToCart}></CoffeeCard>
+            </TouchableOpacity>
           )}
         />
-        <Text style={HomeStyle.titleStyle}>
-          Beanes coffee
-        </Text>
+        <Text style={HomeStyle.titleStyle}>Beanes coffee</Text>
         <FlatList
           data={BeansList}
           horizontal
           renderItem={({item}) => (
             <CoffeeCard
-              image={item.imagelink_square}
-              index={item.index}
-              name={item.name}
-              price={item.prices[0].price}
-              details={item.special_ingredient}></CoffeeCard>
+            category={item}
+            clickHandler={addItemToCart}></CoffeeCard>
           )}
         />
       </View>
