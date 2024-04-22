@@ -9,12 +9,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {useState} from 'react';
+import {useState , useRef} from 'react';
 import colors from '../../assets/colors';
 import {useStore} from '../../store/store';
 import CustomIcon from '../../assets/CustomIcon';
 import HomeStyle from './HomeStyles';
-import CoffeeCard from '../../CoffeeCard';
+import CoffeeCard from '../../comonents/CoffeeCard';
 import Category from '../data/Category';
 
 function getCategoryNames(categoriesData: Category[]) {
@@ -43,18 +43,21 @@ const HomeScreen = ({navigation}: any) => {
   const addToCart = useStore((state: any) => state.addToCart);
   const categoryList = getCategoryNames(CoffeeList);
   const CartList = useStore((state: any) => state.CartList);
+  const ListRef: any = useRef<FlatList>();
 
   const addItemToCart = (cofee: Category) => {
     addToCart(cofee);
-    console.log ("CartList" , CartList.length )
   };
 
   const handleSearch = () => {
-    console.log('search text ', searchText);
     setCurrentCofee(getDataByCategory(searchText, CoffeeList));
   };
 
   const handleCategrorySearch = (category: string) => {
+    ListRef?.current?.scrollToOffset({
+      animated: true,
+      offset: 0,
+    });
     setCurrentCofee(getDataByCategory(category, CoffeeList));
   };
 
@@ -87,6 +90,8 @@ const HomeScreen = ({navigation}: any) => {
           )}
         />
         <FlatList
+          // to update scroll of list to position 0
+          ref={ListRef}
           data={currentCofeeList}
           horizontal
           renderItem={({item}) => (

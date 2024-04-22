@@ -7,7 +7,7 @@ import { produce } from 'immer';
 import Category from '../screens/data/Category';
 
 export const useStore = create(
-  persist(
+  //persist(
     (set, get) => ({
       coffeeList: CoffeeData,
       beansData: BeansData,
@@ -15,22 +15,21 @@ export const useStore = create(
       coffeePrice: 0,
       CartList: [] , 
       HistoryList: [],
-      addToCart: (cartItem: Category) =>
+      addToCart: (cartItem: any) =>
         set(
           produce(state => {
+            console.log ( "cartList" , state.CartList)
             let found = false;
-            console.log("cartListSize" , state.CartList)
-            console.log("cartListSize" , state.CartList.length)
             if (state.CartList.length > 0) {
-              state.CartList.forEach((item: Category) => {
-                console.log('item.id', item)
-                  console.log('cartItem.id', cartItem.id)
+              state.CartList.forEach((item: any) => {
                 if (item.id === cartItem.id) {
                   found = true;
                   let size = false 
                   item.prices.forEach((prices: any) => {
                     if (prices.size === cartItem.prices[0].size) {
                       size = true;
+                      prices.quantity++;
+                      console.log ("item after add prices." , item)
                     }
                     return
                   }   
@@ -49,8 +48,22 @@ export const useStore = create(
               state.CartList.push(cartItem);
             }
           }),
-        ),
+      ),
+    calcualtePrices: () => {
+      set(
+        produce(state => {
+          let total = 0;
+          state.CartList.forEach((item: any) => {
+            item.prices.forEach((prices: any) => {
+              total = total + parseFloat(prices.price);
+            });
+          });
+          state.coffeePrice = total;
+        }),
+      )
+      }
+    
     }),
-    {name: 'coffeeStore', storage: createJSONStorage(() => AsyncStorage)},
-  ),
+  //  {name: 'coffeeStoreUpdate', storage: createJSONStorage(() => AsyncStorage)},
+  //),
 );

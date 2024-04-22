@@ -7,9 +7,9 @@ import {
   ImageProps,
   TouchableOpacity,
 } from 'react-native';
-import colors from './assets/colors';
-import CustomIcon from './assets/CustomIcon';
-import Category from './screens/data/Category';
+import colors from '../assets/colors';
+import CustomIcon from '../assets/CustomIcon';
+import Category from '../screens/data/Category';
 
 interface CoffeeParameters {
   category: Category;
